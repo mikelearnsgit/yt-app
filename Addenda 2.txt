@@ -1,0 +1,30 @@
+At some point in the course you may end up getting Warning: Each child in a list should have a unique "key" prop even after we add a key prop in the "Fixing a Few Warnings" lecture. To ensure that this is not an issue, we should add a type parameter to our axios config object to only search for videos and not playlists.
+
+If your params are in the youtube.js file, add the type parameter like so:
+
+apis/youtube.js:
+
+export default axios.create({
+    baseURL: 'https://www.googleapis.com/youtube/v3',
+    params: {
+      part: 'snippet', 
+      type: 'video',
+      maxResults: 5,
+      key: KEY
+  }
+});
+If your params are in the Apps.js component, add the type parameter like so:
+
+App.js:
+
+  onTermSubmit = term => {
+    youtube.get("/search", {
+      params: {
+        q: term,
+        part: "snippet",
+        type: 'video',
+        maxResults: 5,
+        key: KEY
+      }
+    });
+  };
